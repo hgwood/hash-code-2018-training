@@ -10,6 +10,9 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 
 ## Fonctions utilitaires
 
+- [Assert](https://nodejs.org/dist/latest-v6.x/docs/api/assert.html)
+- [Lodash](https://lodash.com), évidemment
+- [Debug](https://www.npmjs.com/package/debug)
 - Parsing du fichier d'entrée : [`jolicitron`](https://www.npmjs.com/package/jolicitron)
 - Manipulations de grilles / matrices 2D : [`grid-utils.js`](https://github.com/hgwood/hash-code-2017-qualifications/blob/master/grid-utils.js)
 
