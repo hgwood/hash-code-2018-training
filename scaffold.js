@@ -7,7 +7,9 @@ function scaffold (functionName) {
 }
 
 function scaffoldProductionCode (functionName) {
-  return `const _ = require('lodash')
+  return `const assert = require('assert')
+const debug = require('debug')('${functionName}')
+const _ = require('lodash')
 
 module.exports = function ${functionName} () {
 
