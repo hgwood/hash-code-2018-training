@@ -26,6 +26,11 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 
 - Créer un fichier `.env` à la racine du repo et y mettre son token d'authentification du judge (format: `HASH_CODE_JUDGE_AUTH_TOKEN=<token>`)
 
+## Checklist de début de challenge
+
+- Configurer les data sets dans `upload.js`
+- Télécharger et commiter les fichiers d'entrée
+
 ## Conseils
 
 - Pusher rapidement sur GitHub pour mettre à disposition de l'équipe
