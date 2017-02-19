@@ -9,7 +9,8 @@
     "test": "mocha *.test.js",
     "upload": "node -r dotenv/config ./upload",
     "zip": "node ./zip",
-    "scaffold": "node scaffold"
+    "scaffold": "node scaffold",
+    "submit": "npm run zip && npm run upload"
   },
   "repository": {
     "type": "git",
