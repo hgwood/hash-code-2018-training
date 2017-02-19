@@ -35,3 +35,13 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Builds
+.builds/
+
+# Problem IOs
+*.in
+*.out.txt
+
+Environment vars
+/.env
