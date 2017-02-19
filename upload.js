@@ -27,12 +27,7 @@ if (authToken) {
 const createUrlUri = 'https://hashcode-judge.appspot.com/_ah/api/judge/v1/upload/createUrl'
 const submitUri = 'https://hashcode-judge.appspot.com/_ah/api/judge/v1/submissions'
 const authorizationHeader = {'Authorization': `Bearer ${authToken}`}
-const dataSets = {
-  example: 5708411572322304,
-  small: 6050554908246016,
-  medium: 5184724934852608,
-  big: 6310624841695232
-}
+const dataSets = {}
 
 const solutionSchema = joi.object().min(2)
     .keys(_.mapValues(dataSets, () => joi.string()))
@@ -87,6 +82,10 @@ function shorten (str) {
 }
 
 if (module === require.main) {
+  if (_.isEmpty(dataSets)) {
+    console.log('data set ids not initialized!')
+    process.exit(1)
+  }
   const co = require('co')
   const explode = err => process.nextTick(() => { throw err })
   let solution = _(process.argv).drop(2).chunk(2).fromPairs().value()
