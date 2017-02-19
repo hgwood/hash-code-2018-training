@@ -22,7 +22,7 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 - Configurer eslint dans l'éditeur avec auto-fix on save
 - Se familiariser avec la signature des fonctions utilitaires
 
-## Prépation juste avant le challenge
+## Préparation juste avant le challenge
 
 - Créer un fichier `.env` à la racine du repo et y mettre son token d'authentification du judge (format: `HASH_CODE_JUDGE_AUTH_TOKEN=<token>`)
 
