@@ -1,7 +1,5 @@
 'use strict'
 
-process.env.DEBUG = '*' // enables all debug messages
-
 const _ = require('lodash')
 const glob = require('glob')
 const read = require('./read')
