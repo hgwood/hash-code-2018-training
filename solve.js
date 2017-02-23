@@ -5,7 +5,6 @@ const requestsSortedByLatencySaved = require('./requests-sorted-by-latency-saved
 
 module.exports = function solve (problem) {
   const requestByPopularity = requestsSortedByLatencySaved(problem) // _.orderBy(problem.requests, ['popularity'], ['desc'])
-
   const cacheServers = _.uniqBy(_.map(_.flatMap(problem.endpoints, endpoint => endpoint.cacheServers), ({id}) => ({id, capacity: problem.cacheServerCapacity})), 'id')
 
   const videosLatencyByEnpoint = _.mapValues(
@@ -27,7 +26,7 @@ module.exports = function solve (problem) {
     // cacheServersByEndPoint = _.sortBy(cacheServersByEndPoint, 'latency')
 
     const cacheServer = _.first(cacheServersByEndPoint)
-    if (cacheServer) {
+    if (cacheServer !== undefined) {
       _.find(cacheServers, {id: cacheServer}).capacity -= video.size
       return {
         request,
