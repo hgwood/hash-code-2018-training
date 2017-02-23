@@ -4,9 +4,15 @@ const gridUtils = require('./grid-utils')
 const requestsSortedByLatencySaved = require('./requests-sorted-by-latency-saved')
 
 module.exports = function solve (problem) {
-  const requestByPopularity = requestsSortedByLatencySaved(problem) // _.orderBy(problem.requests, ['popularity'], ['desc'])
-  const cacheServers = _.uniqBy(_.map(_.flatMap(problem.endpoints, endpoint => endpoint.cacheServers), ({id}) => ({id, capacity: problem.cacheServerCapacity})), 'id')
+  debug('nvideos', problem.videos.length)
+  debug('nendpoints', problem.endpoints.length)
+  debug('nrequests', problem.requests.length)
 
+  debug('cacheServers start')
+  const cacheServers = _.uniqBy(_.map(_.flatMap(problem.endpoints, endpoint => endpoint.cacheServers), ({id}) => ({id, capacity: problem.cacheServerCapacity})), 'id')
+  debug('cacheServers end')
+
+  debug('videosLatencyByEnpoint start')
   const videosLatencyByEnpoint = _.mapValues(
     _.groupBy(problem.requests, 'endpoint'),
     requests => _.mapValues(
@@ -15,7 +21,7 @@ module.exports = function solve (problem) {
     )
   )
 
-  let requestsWithCacheServer = _.map(requestByPopularity, request => {
+  let requestsWithCacheServer = _.map(requestsSortedByLatencySaved(problem, videosLatencyByEnpoint), request => {
     const video = _.find(problem.videos, {index: request.video})
 
     let cacheServersByEndPoint = [request.cache] // getCacheServersByEndpoint(problem, request.endpoint)
