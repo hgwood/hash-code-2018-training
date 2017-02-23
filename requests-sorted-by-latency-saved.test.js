@@ -37,14 +37,14 @@ describe('requestsSortedByLatencySaved', function () {
         {video: 3, endpoint: 0, cache: 0, latency: 150000, savedLatency: 1350000},
         {video: 3, endpoint: 0, cache: 2, latency: 300000, savedLatency: 1200000},
         {video: 3, endpoint: 0, cache: 1, latency: 450000, savedLatency: 1050000},
-        {video: 3, endpoint: 1, cache: 2, latency: 400000, savedLatency: -150000},
-        {video: 0, endpoint: 1, cache: 2, latency: 800000, savedLatency: -300000},
+        {video: 1, endpoint: 0, cache: 0, latency: 100000, savedLatency: 900000},
+        {video: 1, endpoint: 0, cache: 2, latency: 200000, savedLatency: 800000},
+        {video: 1, endpoint: 0, cache: 1, latency: 300000, savedLatency: 700000},
         {video: 4, endpoint: 0, cache: 0, latency: 50000, savedLatency: 450000},
         {video: 4, endpoint: 0, cache: 2, latency: 100000, savedLatency: 400000},
         {video: 4, endpoint: 0, cache: 1, latency: 150000, savedLatency: 350000},
-        {video: 1, endpoint: 0, cache: 0, latency: 100000, savedLatency: 900000},
-        {video: 1, endpoint: 0, cache: 2, latency: 200000, savedLatency: 800000},
-        {video: 1, endpoint: 0, cache: 1, latency: 300000, savedLatency: 700000}
+        {video: 3, endpoint: 1, cache: 2, latency: 400000, savedLatency: -150000},
+        {video: 0, endpoint: 1, cache: 2, latency: 800000, savedLatency: -300000}
       ])
   })
 })
