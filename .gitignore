@@ -40,7 +40,6 @@ jspm_packages
 .builds/
 
 # Problem IOs
-*.in
 *.out.txt
 
 Environment vars
