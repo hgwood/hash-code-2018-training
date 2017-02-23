@@ -4,9 +4,16 @@ const debug = require('debug')('read')
 const jolicitron = require('jolicitron')
 
 module.exports = function read (filePath) {
-  const textFromInputFile = fs.readFileSync(filePath, 'utf8')
-  debug(`read ${textFromInputFile.length} chars from ${filePath}`)
-  return module.exports.parse(textFromInputFile)
+  try {
+    fs.accessSync(`${filePath}.json`)
+    return require(`${filePath}.json`)
+  } catch (err) {
+    const textFromInputFile = fs.readFileSync(filePath, 'utf8')
+    debug(`read ${textFromInputFile.length} chars from ${filePath}`)
+    const result = module.exports.parse(textFromInputFile)
+    fs.writeFileSync(`${filePath}.json`, JSON.stringify(result, null, 2))
+    return result
+  }
 }
 
 function parse (textFromInputFile) {
@@ -23,6 +30,7 @@ function parse (textFromInputFile) {
   ])
   const {parsedValue, remaining} = parse(textFromInputFile)
   assert.equal(remaining.trim(), '')
+  debug('end')
   return parsedValue
 }
 
