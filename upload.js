@@ -29,9 +29,9 @@ const submitUri = 'https://hashcode-judge.appspot.com/_ah/api/judge/v1/submissio
 const authorizationHeader = {'Authorization': `Bearer ${authToken}`}
 const dataSets = {
   kittens: 4881867933220864,
-  meAtTheZoo: 5570727000408064,
-  trending: 4919276561498112,
-  videosWorthSpreading: 6412425163177984
+  me_at_the_zoo: 5570727000408064,
+  trending_today: 4919276561498112,
+  videos_worth_spreading: 6412425163177984
 }
 
 const solutionSchema = joi.object().min(2)
