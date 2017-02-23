@@ -11,7 +11,7 @@ module.exports = function read (filePath) {
     const textFromInputFile = fs.readFileSync(filePath, 'utf8')
     debug(`read ${textFromInputFile.length} chars from ${filePath}`)
     const result = module.exports.parse(textFromInputFile)
-    fs.writeFileSync(`${filePath}.json`, JSON.stringify(result, null, 2))
+    fs.writeFileSync(`${filePath}.json`, JSON.stringify(result))
     return result
   }
 }
