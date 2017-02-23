@@ -1,4 +1,5 @@
 const fs = require('fs')
+const assert = require('assert')
 const debug = require('debug')('read')
 const jolicitron = require('jolicitron')
 
@@ -13,6 +14,7 @@ function parse (textFromInputFile) {
     // TODO: insert parser config here
   ])
   const {parsedValue, remaining} = parse(textFromInputFile)
+  assert.equal(remaining.trim(), '')
   return parsedValue
 }
 
