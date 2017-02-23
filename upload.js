@@ -27,7 +27,11 @@ if (authToken) {
 const createUrlUri = 'https://hashcode-judge.appspot.com/_ah/api/judge/v1/upload/createUrl'
 const submitUri = 'https://hashcode-judge.appspot.com/_ah/api/judge/v1/submissions'
 const authorizationHeader = {'Authorization': `Bearer ${authToken}`}
-const dataSets = {}
+const dataSets = {
+  kittens: 4881867933220864,
+  meAtTheZoo: 5570727000408064,
+  trending: 4919276561498112
+}
 
 const solutionSchema = joi.object().min(2)
     .keys(_.mapValues(dataSets, () => joi.string()))
