@@ -19,10 +19,6 @@ describe('parse', function () {
       1 0 1000
       `
     assert.deepEqual(parse(textFromInputFile), {
-      // nvideos: 5,
-      // nendpoints: 2,
-      // nrequestDescriptions: 4,
-      // ncacheServers: 3,
       cacheServerCapacity: 100,
       videos: [
         {index: 0, size: 50},
