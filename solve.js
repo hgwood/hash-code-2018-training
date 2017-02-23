@@ -5,14 +5,22 @@ const getCacheServersByEndpoint = require('./get-cache-servers-by-endpoint')
 
 module.exports = function solve (problem) {
   const requestByPopularity = _.orderBy(problem.requests, ['popularity'], ['desc'])
-  const usedServers = []
+
+  const cacheServers = _.uniqBy(_.map(_.flatMap(problem.endpoints, endpoint => endpoint.cacheServers), ({id}) => ({id, capacity: problem.cacheServerCapacity})), 'id')
+
   let requestsWithCacheServer = _.map(requestByPopularity, request => {
-    let cacheServers = getCacheServersByEndpoint(problem, request.endpoint)
-    cacheServers = _.sortBy(cacheServers, 'latency')
-    cacheServers = _.filter(cacheServers, cacheServer => !_.includes(usedServers, cacheServer.id))
-    const cacheServer = _.first(cacheServers)
+    const video = _.find(problem.videos, {index: request.video})
+
+    let cacheServersByEndPoint = getCacheServersByEndpoint(problem, request.endpoint)
+    cacheServersByEndPoint = _.filter(cacheServersByEndPoint, ({id}) => {
+      const cacheServer = _.find(cacheServers, {id})
+      return cacheServer && cacheServer.capacity >= video.size
+    })
+    cacheServersByEndPoint = _.sortBy(cacheServersByEndPoint, 'latency')
+
+    const cacheServer = _.first(cacheServersByEndPoint)
     if (cacheServer) {
-      usedServers.push(cacheServer.id)
+      _.find(cacheServers, {id: cacheServer.id}).capacity -= video.size
       return {
         request,
         cacheServer
@@ -20,9 +28,10 @@ module.exports = function solve (problem) {
     }
   })
   requestsWithCacheServer = _.compact(requestsWithCacheServer)
-  const solution = _.map(requestsWithCacheServer, ({cacheServer, request}) => ({
-    id: cacheServer.id,
-    videos: [request.video]
+  const requestsByCacheServer = _.groupBy(requestsWithCacheServer, 'cacheServer.id')
+  const solution = _.map(requestsByCacheServer, (requests, id) => ({
+    id,
+    videos: _.uniq(_.map(requests, request => request.request.video))
   }))
   return solution
 }
