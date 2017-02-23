@@ -10,7 +10,12 @@
     "upload": "node -r dotenv/config ./upload",
     "zip": "node ./zip",
     "scaffold": "node scaffold",
-    "submit": "npm run zip && npm run upload"
+    "submit": "npm run zip && npm run upload",
+    "all": "run-p kittens me_at_the_zoo trending_today videos_worth_spreading",
+    "kittens": "npm start kittens.in",
+    "me_at_the_zoo": "npm start me_at_the_zoo.in",
+    "trending_today": "npm start trending_today.in",
+    "videos_worth_spreading": "npm start videos_worth_spreading.in"
   },
   "repository": {
     "type": "git",
@@ -42,6 +47,7 @@
     "glob": "^7.1.1",
     "joi": "^10.2.0",
     "mocha": "^3.2.0",
+    "npm-run-all": "^4.0.2",
     "request": "^2.79.0",
     "request-promise": "^4.1.1"
   },
