@@ -85,7 +85,7 @@ function shorten (str) {
 
 if (module === require.main) {
   if (_.isEmpty(dataSets)) {
-    console.log('data set ids not initialized!')
+    console.log('data set ids not initialized! open upload.js and fill the dataSets value')
     process.exit(1)
   }
   const co = require('co')
