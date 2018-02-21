@@ -1,3 +1,8 @@
+/**
+ * `node scaffold <functioName>` generates a new code file with an empty
+ * function and another file with a matching test
+ */
+
 const fs = require('fs')
 const _ = require('lodash')
 
