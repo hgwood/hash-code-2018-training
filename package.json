@@ -1,5 +1,5 @@
 {
-  "name": "hash-code-2017-training",
+  "name": "hash-code-2018-training",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,33 +11,32 @@
     "zip": "node ./zip",
     "scaffold": "node scaffold",
     "submit": "npm run zip && npm run upload",
-    "all": "run-p kittens me_at_the_zoo trending_today videos_worth_spreading",
-    "kittens": "npm start kittens.in",
-    "me_at_the_zoo": "npm start me_at_the_zoo.in",
-    "trending_today": "npm start trending_today.in",
-    "videos_worth_spreading": "npm start videos_worth_spreading.in"
+    "all": "run-p input1 input2 input3 input4",
+    "input1": "npm start input1.in",
+    "input2": "npm start input2.in",
+    "input3": "npm start input3.in",
+    "input4": "npm start input4.in"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hgwood/hash-code-2017-training.git"
+    "url": "git+https://github.com/hgwood/hash-code-2018-training.git"
   },
   "keywords": [
     "hash code",
     "google",
     "contest",
-    "2017"
+    "2018"
   ],
   "contributors": [
+    "Thibaud Courtoison",
     "Julien Landuré",
-    "Nicolas Lepage",
-    "Pierre Reliquet",
     "Hugo Wood"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hgwood/hash-code-2017-training/issues"
+    "url": "https://github.com/hgwood/hash-code-2018-training/issues"
   },
-  "homepage": "https://github.com/hgwood/hash-code-2017-training#readme",
+  "homepage": "https://github.com/hgwood/hash-code-2018-training#readme",
   "devDependencies": {
     "archiver": "^1.3.0",
     "eslint": "^3.14.1",
