@@ -1,11 +1,11 @@
-# Hash Code 2017 Qualifications
+# Hash Code 2018 Training
 
 Judge : https://hashcodejudge.withgoogle.com/#/home
 
 ## Scripts
 
 - Tests : `npm run test`
-- Commit, zip, et soumission au juge : `npm run submit`
+- Commit, zip, et soumission au juge : `npm run submit` (tip: tagguer le commit avec le score une fois ce dernier connu : `git tag score=<score> <sha1>`)
 - Génère une nouvelle fonction avec son test : `npm run scaffold <functionName>`
 
 ## Fonctions utilitaires
