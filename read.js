@@ -13,7 +13,8 @@ module.exports = function read(filePath) {
     const textFromInputFile = fs.readFileSync(filePath, "utf8");
     debug(`read ${textFromInputFile.length} chars from ${filePath}`);
     const result = module.exports.parse(textFromInputFile);
-    fs.writeFileSync(`${filePath}.json`, JSON.stringify(result));
+    fs.writeFileSync(cachedFile, JSON.stringify(result));
+    debug(`written cached input file to ${cachedFile}`)
     return result;
   }
   return require(`./${cachedFile}`);
@@ -53,7 +54,7 @@ const parse = _.flow(
   splitHeaderFromPizza,
   _.spread(parseHeaderAndPizza),
   assertValid,
-  _.tap(() => debug("end"))
+  _.tap(() => debug("parsing completed"))
 );
 
 module.exports.parse = parse;
