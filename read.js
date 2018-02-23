@@ -1,7 +1,7 @@
 const fs = require("fs");
 const assert = require("assert");
 const debug = require("debug")("read");
-const jolicitron = require("jolicitron");
+const _ = require("lodash/fp");
 
 module.exports = function read(filePath) {
   const cachedFile = `${filePath}.json`;
@@ -19,18 +19,41 @@ module.exports = function read(filePath) {
   return require(`./${cachedFile}`);
 };
 
-function parse(textFromInputFile) {
-  const parse = jolicitron((save, n) => [
-    // TODO: insert parser config here
-  ]);
-  const { parsedValue, remaining } = parse(textFromInputFile);
-  assert.equal(
-    remaining.trim(),
-    "",
-    "input has not been entirely consumed by the parser; parser might be incorrect"
-  );
-  debug("end");
-  return parsedValue;
-}
+const splitHeaderFromPizza = _.flow(
+  _.split("\n"),
+  _.map(_.trim),
+  _.filter(_.identity),
+  _.over([_.first, _.tail])
+);
+
+const parseHeader = _.flow(
+  _.split(" "),
+  _.map(Number),
+  _.zipObject(["nrows", "ncolumns", "minIngredients", "maxCells"])
+);
+
+const parsePizza = _.map(_.toArray);
+
+const parseHeaderAndPizza = _.overArgs(
+  (header, pizza) => Object.assign({}, header, { pizza }),
+  [parseHeader, parsePizza]
+);
+
+const assertValid = _.tap(({ nrows, ncolumns, pizza }) => {
+  assert.equal(pizza.length, nrows, "number of rows is not consistent");
+  pizza.forEach(row => {
+    assert.equal(row.length, ncolumns, "number of columns is not consistent");
+    row.forEach(cell => {
+      assert(cell.match(/[MT]/), "neither mushroom not tomatoe??");
+    });
+  });
+});
+
+const parse = _.flow(
+  splitHeaderFromPizza,
+  _.spread(parseHeaderAndPizza),
+  assertValid,
+  _.tap(() => debug("end"))
+);
 
 module.exports.parse = parse;
