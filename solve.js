@@ -1,7 +1,5 @@
-const debug = require('debug')('solve')
-const _ = require('lodash')
-const gridUtils = require('./grid-utils')
+const debug = require("debug")("solve");
+const _ = require("lodash");
+const gridUtils = require("./grid-utils");
 
-module.exports = function solve (problem) {
-
-}
+module.exports = function solve(problem) {};

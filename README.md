@@ -23,6 +23,7 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
   - Debugger intégré, et configuration fournie dans ce repo (F5 pour lancer)
 - Configurer editorconfig dans l'éditeur avec auto-fix on save
 - Configurer eslint dans l'éditeur avec auto-fix on save
+- Configurer prettier dans l'éditeur avec format on save
 - Se familiariser avec la signature des fonctions utilitaires
 
 ## Préparation juste avant le challenge
