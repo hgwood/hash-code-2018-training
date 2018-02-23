@@ -7,7 +7,9 @@ const exec = require('child_process').execSync
 
 try {
   exec("git add *.js && git commit -m 'tayo!'", {encoding: 'utf8'})
-} catch (err) {}
+} catch (err) {
+  console.warn('could not commit because', err, 'continuing anyway')
+}
 const sha1 = exec('git rev-parse HEAD', {encoding: 'utf8'}).trim()
 const date = new Date().toISOString().replace(/:/g, '-')
 const dest = `./.builds/submission-sources-${date}-${sha1}.zip`
