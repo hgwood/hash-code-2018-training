@@ -24,7 +24,7 @@ function parse (textFromInputFile) {
     // TODO: insert parser config here
   ])
   const {parsedValue, remaining} = parse(textFromInputFile)
-  assert.equal(remaining.trim(), '')
+  assert.equal(remaining.trim(), '', 'input has not been entirely consumed by the parser; parser might be incorrect')
   debug('end')
   return parsedValue
 }
