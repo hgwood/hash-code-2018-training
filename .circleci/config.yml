@@ -84,9 +84,9 @@ workflows:
       - test:
           requires:
             - install-dependencies
-      - data-set1: &data_set_requires
+      - data-set-1: &data_set_requires
           requires:
             - install-dependencies
-      - data-set2: *data_set_requires
-      - data-set3: *data_set_requires
-      - data-set4: *data_set_requires
+      - data-set-2: *data_set_requires
+      - data-set-3: *data_set_requires
+      - data-set-4: *data_set_requires
