@@ -19,6 +19,8 @@ const gridUtils = require("./grid-utils");
  * @param {ProblemInput} problem
  * @returns {Slice[]}
  */
-function solve(problem) {}
+function solve(problem) {
+  return [];
+}
 
 module.exports = solve;
