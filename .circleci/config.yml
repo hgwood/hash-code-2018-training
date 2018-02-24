@@ -1,0 +1,86 @@
+version: 2
+jobs:
+
+  checkout:
+    docker: &docker
+      - image: circleci/node:8
+    working_directory: &working_directory ~/hash-code-2018-training
+    steps:
+      - checkout
+      - save_cache:
+          key: checkout-cache-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - *working_directory
+
+  install-dependencies:
+    docker: *docker
+    steps:
+      - restore_cache: &restore_checkout_cache
+          keys:
+            - checkout-cache-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache: &restore_dependency_cache
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+
+  test:
+    docker: *docker
+    steps:
+      - *restore_checkout_cache
+      - *restore_dependency_cache
+      - run:
+          command: npm test
+
+  data-set-1:
+    docker: *docker
+    steps:
+      - *restore_checkout_cache
+      - *restore_dependency_cache
+      - run:
+          command: npm run input1
+
+  data-set-2:
+    docker: *docker
+    steps:
+      - *restore_checkout_cache
+      - *restore_dependency_cache
+      - run:
+          command: npm run input2
+
+  data-set-3:
+    docker: *docker
+    steps:
+      - *restore_checkout_cache
+      - *restore_dependency_cache
+      - run:
+          command: npm run input3
+
+  data-set-4:
+    docker: *docker
+    steps:
+      - *restore_checkout_cache
+      - *restore_dependency_cache
+      - run:
+          command: npm run input4
+
+workflows:
+  version: 2
+  try-everything:
+    jobs:
+      - checkout
+      - install-dependencies:
+          requires:
+            - checkout
+      - test:
+          requires:
+            - install-dependencies
+      - data-set1: &data_set_requires
+          requires:
+            - install-dependencies
+      - data-set2: *data_set_requires
+      - data-set3: *data_set_requires
+      - data-set4: *data_set_requires
