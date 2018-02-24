@@ -36,7 +36,7 @@ const dataSets = _.range(4).reduce((dataSets, i) => {
   return Object.assign(dataSets, {
     [name]: process.env[`npm_package_config_input${i + 1}_id`]
   });
-});
+}, {});
 
 const solutionSchema = joi
   .object()
