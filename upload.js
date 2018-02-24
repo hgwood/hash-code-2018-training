@@ -121,7 +121,7 @@ if (module === require.main) {
     .fromPairs()
     .value();
   if (_.isEmpty(solution)) {
-    solution = _.mapValues(dataSets, (id, name) => `${name}.in.out.txt`);
+    solution = _.mapValues(dataSets, (id, name) => `${name}.out.txt`);
     solution.sources = path.join(
       __dirname,
       ".builds",

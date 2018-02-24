@@ -4,7 +4,7 @@ const debug = require("debug")("read");
 const _ = require("lodash/fp");
 
 module.exports = function read(filePath) {
-  const cachedFile = `${filePath}.json`;
+  const cachedFile = `${filePath.split(".")[0]}.in.json`;
   try {
     fs.accessSync(cachedFile);
     debug(`using cached ${cachedFile}`);
