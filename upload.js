@@ -31,9 +31,13 @@ const createUrlUri =
 const submitUri =
   "https://hashcode-judge.appspot.com/_ah/api/judge/v1/submissions";
 const authorizationHeader = { Authorization: `Bearer ${authToken}` };
-const dataSets = {
-  // insert data set ids here
-};
+const dataSets = _.range(4).reduce((dataSets, i) => {
+  const name = process.env[`npm_package_config_input${i + 1}_name`];
+  if (!name) return dataSets;
+  return Object.assign(dataSets, {
+    [name]: process.env[`npm_package_config_input${i + 1}_id`]
+  });
+});
 
 const solutionSchema = joi
   .object()
