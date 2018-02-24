@@ -38,6 +38,7 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 - Modifier le champ `config` du `package.json` pour mettre le nom et les id des fichiers d'entrée
   - `name` doit correspondre au nom du fichier sans extension
   - `id` doit correspondre à l'id du data set dans le judge, pour pouvoir uploader
+    - l'id est la valeur du paramètre de query `dataSet` qui est fournit par le Judge à l'API quand on upload une solution (chercher l'appel à `https://hashcode-judge.appspot.com/api/judge/v1/submissions`)
 
 ## Conseils
 
