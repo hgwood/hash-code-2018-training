@@ -3,6 +3,7 @@ const debug = require("debug")("download");
 const fs = require("fs");
 const request = require("request");
 const requestPromise = require("request-promise");
+const packageJson = require("./package.json");
 
 const authToken = process.env.HASH_CODE_JUDGE_AUTH_TOKEN;
 if (!authToken) {
@@ -43,6 +44,13 @@ const downloadInputs = round => {
 const download = async () => {
   const roundsInfo = await downloadRoundsInfo();
   const activeRound = roundsInfo.items.filter(round => round.active)[0];
+  packageJson.config = activeRound.dataSets.reduce((config, dataSet, i) => {
+    return Object.assign(config, {
+      [`input${i + 1}`]: { id: dataSet.id, name: _.kebabCase(dataSet.name) }
+    });
+  }, packageJson.config);
+  fs.writeFileSync("package.json", JSON.stringify(packageJson, null, 2));
+  debug(`written package.json`);
   const roundFile = "round.json";
   fs.writeFileSync(roundFile, JSON.stringify(activeRound, null, 2));
   debug(`written ${roundFile}`);

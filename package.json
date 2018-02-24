@@ -8,7 +8,7 @@
     "lint": "eslint *.js",
     "prettier": "prettier --write \"*.js\"",
     "test": "mocha *.test.js",
-    "init": "npm run download && git add *.pdf *.in.txt round.json && git commit -m \":bento: add statement and input files\"",
+    "init": "npm run download && git add *.pdf *.in.txt round.json package.json && git commit -m \":bento: add statement and input files\"",
     "download": "cross-env DEBUG=* node -r dotenv/config ./download",
     "upload": "cross-env DEBUG=* node -r dotenv/config ./upload",
     "zip": "cross-env DEBUG=* node ./zip",
@@ -22,20 +22,20 @@
   },
   "config": {
     "input1": {
-      "name": "1-example",
-      "id": "5167684987650048"
+      "id": "5167684987650048",
+      "name": "1-example"
     },
     "input2": {
-      "name": "2-small",
-      "id": "5739156827275264"
+      "id": "5739156827275264",
+      "name": "2-small"
     },
     "input3": {
-      "name": "3-medium",
-      "id": "5726181865291776"
+      "id": "5726181865291776",
+      "name": "3-medium"
     },
     "input4": {
-      "name": "4-big",
-      "id": "5690701543112704"
+      "id": "5690701543112704",
+      "name": "4-big"
     }
   },
   "repository": {
