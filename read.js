@@ -14,7 +14,7 @@ module.exports = function read(filePath) {
     debug(`read ${textFromInputFile.length} chars from ${filePath}`);
     const result = module.exports.parse(textFromInputFile);
     fs.writeFileSync(cachedFile, JSON.stringify(result));
-    debug(`written cached input file to ${cachedFile}`)
+    debug(`written cached input file to ${cachedFile}`);
     return result;
   }
   return require(`./${cachedFile}`);
