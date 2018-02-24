@@ -4,6 +4,8 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 
 ## Scripts
 
+- Lancer une résolution sur tous les fichiers d'entrée, en parallèle : `npm run all`
+- Lancer une résolution sur un fichier d'entrée : `npm run input<1|2|3|4>`
 - Tests : `npm run test`
 - Commit, zip, et soumission au juge : `npm run submit` (tip: tagguer le commit avec le score une fois ce dernier connu : `git tag score=<score> <sha1>`)
 - Génère une nouvelle fonction avec son test : `npm run scaffold <functionName>`
@@ -32,8 +34,10 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 
 ## Checklist de début de challenge
 
-- Configurer les data sets dans `upload.js`
 - Télécharger et commiter les fichiers d'entrée
+- Modifier le champ `config` du `package.json` pour mettre le nom et les id des fichiers d'entrée
+  - `name` doit correspondre au nom du fichier sans extension
+  - `id` doit correspondre à l'id du data set dans le judge, pour pouvoir uploader
 
 ## Conseils
 
