@@ -34,7 +34,7 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 
 ## Checklist de début de challenge
 
-- Télécharger et commiter les fichiers d'entrée
+- Télécharger et commiter l'énoncé et les fichiers d'entrée avec `npm run download`
 - Modifier le champ `config` du `package.json` pour mettre le nom et les id des fichiers d'entrée
   - `name` doit correspondre au nom du fichier sans extension
   - `id` doit correspondre à l'id du data set dans le judge, pour pouvoir uploader

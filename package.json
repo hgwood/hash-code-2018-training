@@ -9,6 +9,7 @@
     "prettier": "prettier --write \"*.js\"",
     "test": "mocha *.test.js",
     "upload": "cross-env DEBUG=* node -r dotenv/config ./upload",
+    "download": "cross-env DEBUG=* node -r dotenv/config ./download && git add *.pdf *.in.txt && git commit -m \":bento: add statement and input files\"",
     "zip": "cross-env DEBUG=* node ./zip",
     "scaffold": "node scaffold",
     "submit": "npm run zip && npm run upload",
@@ -20,19 +21,19 @@
   },
   "config": {
     "input1": {
-      "name": "example",
+      "name": "1-example",
       "id": "5167684987650048"
     },
     "input2": {
-      "name": "small",
+      "name": "2-small",
       "id": "5739156827275264"
     },
     "input3": {
-      "name": "medium",
+      "name": "3-medium",
       "id": "5726181865291776"
     },
     "input4": {
-      "name": "big",
+      "name": "4-big",
       "id": "5690701543112704"
     }
   },
