@@ -43,12 +43,15 @@ const downloadInputs = round => {
 const download = async () => {
   const roundsInfo = await downloadRoundsInfo();
   const activeRound = roundsInfo.items.filter(round => round.active)[0];
+  const roundFile = "round.json";
+  fs.writeFileSync(roundFile, JSON.stringify(activeRound, null, 2));
+  debug(`written ${roundFile}`);
   const statementFile = "statement.pdf";
   downloadProblemStatement(activeRound)
     .pipe(fs.createWriteStream(statementFile))
     .on("close", () => debug(`written ${statementFile}`));
   downloadInputs(activeRound).forEach(({ name, stream }) => {
-    const sanitizedName = _.kebabCase(name)
+    const sanitizedName = _.kebabCase(name);
     const inputFile = `${sanitizedName}.in.txt`;
     stream
       .pipe(fs.createWriteStream(inputFile))

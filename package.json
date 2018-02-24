@@ -8,7 +8,7 @@
     "lint": "eslint *.js",
     "prettier": "prettier --write \"*.js\"",
     "test": "mocha *.test.js",
-    "init": "npm run download && git add *.pdf *.in.txt && git commit -m \":bento: add statement and input files\"",
+    "init": "npm run download && git add *.pdf *.in.txt round.json && git commit -m \":bento: add statement and input files\"",
     "download": "cross-env DEBUG=* node -r dotenv/config ./download",
     "upload": "cross-env DEBUG=* node -r dotenv/config ./upload",
     "zip": "cross-env DEBUG=* node ./zip",

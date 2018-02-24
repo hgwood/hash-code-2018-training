@@ -1,0 +1,34 @@
+{
+  "id": "5736842779426816",
+  "name": "Test Round",
+  "problemBlobKey": "blob/AMIfv94WXlVJBvEkhPOsWc1jLtD2abO7MXgXStc0oHAPH2l0JirdzDFPtke__rF2_IHMcUz_AiPYDmI5RUEh9113M0saTPd8QpOcG4rx4jvB8b7fqXQp4CKSLtZtCApX4GSjj7AhxyRFCJ1s458GxfLvRyOW3LanFg5kuYr7pMhXZpPkRqbSvqBdJK-1axntl-ySUdDGe9eTjYgkvCh_wUAWEwdMcNmcUwmD79M56zZ6zR16Dv9Yzf_MUU2MfbN1dSD7JtuSB1ZlNBFOH-jhVI2GsXrlg7jzMAfcTDtZ8-Xg6UDMKO89VP1nrvwoPKLHFU3urg4AK-EhK02WGMVtARqbQH84acNLhvHaoi1Cp3B37PRYcosWRaWV0DgqmPHUOaBaH4IkGcitn_RA0kKenYhOUMpaepbIzYwILZE7HS5lZvW8ZpC-yYc",
+  "scorerLabel": "pizza",
+  "hideScoreboard": true,
+  "finalistOnly": false,
+  "adminOnly": false,
+  "active": true,
+  "start": "2018-01-08T09:00:00.000Z",
+  "end": "2018-03-01T17:00:00.000Z",
+  "dataSets": [
+    {
+      "id": "5167684987650048",
+      "name": "1 - Example",
+      "inputBlobKey": "blob/AMIfv94FMiLOsbXlWnRxRVQClFiigV835TQ1pPzHiTBaUKLcVxpZzzchDRytIibkdwcRVTGHwqrgvrdSccoTs9ww8D2Ew6GM0ZxNzkKQNBTjhIGqp7y6FSYtW_iq4liO4YkW6nuKchcY1bA0z7adG_8hxJZX_kUULKS90HTM1J45jkHQ8ao146DHc807Z_ImpuHxKXwROUjeD8OgfUp3ZEA2_hUr-ntLpaWNRQXMt_KxqTJ3dQux0r73doKms_6IRA1FW_5Ml3gPmTDZuTtYg2MPmGGRUHfI-h610fCmrW-zm78Hn823jvkp-gLtiDQ9ODywa73IVm2U-lw6oWNjmrgyJjPkJiNpbJ0cw_z2iMmi8xq9j9NK6ER0jWGXzycNtZIE7w5zq43gzcfLpcuBCAd93Ip1K6OgM8huD448uxc_akUIvZhFRiM"
+    },
+    {
+      "id": "5739156827275264",
+      "name": "2 - Small",
+      "inputBlobKey": "blob/AMIfv97CTUR0GMtCp-M32qDwwtCmXQKXLxyNnZtNEJ5rOAYTzEw0GB1Cwy5m-eA5KGjaCHPyYY1aVGj-Z_pKK2Ht-1DUgq6bnEp2p6A_-ZOPayvuNhVS57-uBPNyv3sfvyp_KpI1FHqe7pSjUA-CP553UV8VEaDYp3yD6sNJ09O9t8pJMnmQLUV8UmGJc2WetfYywgQ5V_e-5esxfp95N54qT4t7uso3eAWNwJzAYJl6nn321DRz8iknIIgQq80V4hlAaZHxw5JZ1MP6TbYkjDvpWhkKV5FgLRt0S8HUXB1yhO5rx4a-J5Puj5_eKzFjYo8chsJNTD-uaAZN4Vm10XXwc0TkF0N-LpTwhPeddx0l3foXreIehrRpnsWb2qaKpupwtxYSvfCn4Yhmp5OegEOknamnIWVYYmRD27azX7VCtgCrVwJRzu8"
+    },
+    {
+      "id": "5726181865291776",
+      "name": "3 - Medium",
+      "inputBlobKey": "blob/AMIfv972ITSY0G_MuOuuaqu7UZ1tIz2s0u9DP3MvaZiK8LkywwptlXk3iBjA1vE16E4i7O92Y6sxUQqX37P5eEsuQW9m8znJLNnVmZrDGWuNC0EVvNh4hoF1xG9QArnI5-8a0_n8GrXt6mjGEi5FxX3UBhHGL-trGUh7N5Ao1zI555JZsnb6HftlHDFDYnKvEUP8Fjl6fgMVLVReCvJokZ7zJ7JmElW6IonZekLDNQjHuteiTtxIBloC5x3OtZ7-uNMzTe9aSKApsR4ltrq4aVhHMhlmvsBtTV7rMkHwG2fnzdVwjO8CGVCsz2mNdSO1zox7l1VuQci2v6vNQNAfXZsFsKbXzzZcNwCPGGAdZtdEQNn5iG9cty0wEgx_RVQQwUXNStoneCxSQsVoeXOT7Cosln4REfEeBnXpLKyf1jvJoTgJbyYdphY"
+    },
+    {
+      "id": "5690701543112704",
+      "name": "4 - Big",
+      "inputBlobKey": "blob/AMIfv97P4mA7jkfPpO5USbIhEXEdae_l-SG2adK96LNX_Vcwj9xtzd0s84Wq3d0CNvFOJu0J2AuybYYZhRgTaYd2VqwW6ekuFPbdPKJinueNF9NIhSd1p-4GkANmD2LkXGAZdSK3ZG40jsA9v0MQEnQqseyDWDQd5xmD96KrPKS16IEB4fECBboI1TQHkExI7eIkMYG8LVEG3-t52Dm-UjaiZJnW9GcA8Px9Zv51JXGKys0QJVF89Lp-kPuT-yHwf6fvkp5OoAKGxjT5R5CnO9D93u7zyMpoYftkBkzOj6Kj4X0A8FJoQyja8NYefXv9MmojRVXyHnEDUH02zErau9kzwBzc42Lki81draCaunidf1TL8erN3mwsuhtd1X775CR_v8eH5FhR-qGuOoB-Ac9PlsdrMLSSJPRmpVpnZ1hxknQvOA-QDdI"
+    }
+  ]
+}
