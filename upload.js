@@ -33,6 +33,7 @@ const authorizationHeader = { Authorization: `Bearer ${authToken}` };
 const dataSets = _.range(4).reduce((dataSets, i) => {
   const name = process.env[`npm_package_config_input${i + 1}_name`];
   if (!name) return dataSets;
+  debug(`found data set '${name}' in package.json`);
   return Object.assign(dataSets, {
     [name]: process.env[`npm_package_config_input${i + 1}_id`]
   });
