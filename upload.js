@@ -1,12 +1,11 @@
 /**
  * Usage:
  *
- * node ./upload.js sources sourceZip dataSet1 solutionFileForDataSet1 dataSet2 solutionFileForDataSet2 ...
+ * node ./upload.js
  *
- * sources is required. At least one data set is required. Valid data set names can be found in the dataSet const.
- *
- * If no args is present, the script attemps to upload all data sets using files named ${dataSet}.in.out.txt and
- * takes the highest named file name present in ./.builds for the sources.
+ * - Uses package.json config to know about data sets.
+ * - Expects output files to end with .out.txt
+ * - Expects to find files ordered by creation time in .builds
  */
 
 const path = require("path");
@@ -115,19 +114,16 @@ if (module === require.main) {
     process.nextTick(() => {
       throw err;
     });
-  let solution = _(process.argv)
-    .drop(2)
-    .chunk(2)
-    .fromPairs()
-    .value();
-  if (_.isEmpty(solution)) {
-    solution = _.mapValues(dataSets, (id, name) => `${name}.out.txt`);
-    solution.sources = path.join(
-      __dirname,
-      ".builds",
-      _.last(fs.readdirSync(path.join(__dirname, ".builds")).sort())
-    );
-  }
-  debug("solution", solution);
+  const solution = Object.assign(
+    _.mapValues(dataSets, (id, name) => `${name}.out.txt`),
+    {
+      sources: path.join(
+        __dirname,
+        ".builds",
+        _.last(fs.readdirSync(path.join(__dirname, ".builds")).sort())
+      )
+    }
+  );
+  debug("files to upload", solution);
   co(submitSolution(solution)).catch(explode);
 }
