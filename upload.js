@@ -27,9 +27,8 @@ if (authToken) {
 }
 
 const createUrlUri =
-  "https://hashcode-judge.appspot.com/_ah/api/judge/v1/upload/createUrl";
-const submitUri =
-  "https://hashcode-judge.appspot.com/_ah/api/judge/v1/submissions";
+  "https://hashcode-judge.appspot.com/api/judge/v1/upload/createUrl";
+const submitUri = "https://hashcode-judge.appspot.com/api/judge/v1/submissions";
 const authorizationHeader = { Authorization: `Bearer ${authToken}` };
 const dataSets = _.range(4).reduce((dataSets, i) => {
   const name = process.env[`npm_package_config_input${i + 1}_name`];
