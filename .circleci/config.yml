@@ -14,6 +14,7 @@ jobs:
 
   install-dependencies:
     docker: *docker
+    working_directory: &working_directory
     steps:
       - restore_cache: &restore_checkout_cache
           keys:
@@ -29,41 +30,46 @@ jobs:
 
   test:
     docker: *docker
+    working_directory: &working_directory
     steps:
-      - *restore_checkout_cache
-      - *restore_dependency_cache
+      - restore_cache: *restore_checkout_cache
+      - restore_cache: *restore_dependency_cache
       - run:
           command: npm test
 
   data-set-1:
     docker: *docker
+    working_directory: &working_directory
     steps:
-      - *restore_checkout_cache
-      - *restore_dependency_cache
+      - restore_cache: *restore_checkout_cache
+      - restore_cache: *restore_dependency_cache
       - run:
           command: npm run input1
 
   data-set-2:
     docker: *docker
+    working_directory: &working_directory
     steps:
-      - *restore_checkout_cache
-      - *restore_dependency_cache
+      - restore_cache: *restore_checkout_cache
+      - restore_cache: *restore_dependency_cache
       - run:
           command: npm run input2
 
   data-set-3:
     docker: *docker
+    working_directory: &working_directory
     steps:
-      - *restore_checkout_cache
-      - *restore_dependency_cache
+      - restore_cache: *restore_checkout_cache
+      - restore_cache: *restore_dependency_cache
       - run:
           command: npm run input3
 
   data-set-4:
     docker: *docker
+    working_directory: &working_directory
     steps:
-      - *restore_checkout_cache
-      - *restore_dependency_cache
+      - restore_cache: *restore_checkout_cache
+      - restore_cache: *restore_dependency_cache
       - run:
           command: npm run input4
 
