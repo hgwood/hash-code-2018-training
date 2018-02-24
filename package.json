@@ -13,10 +13,28 @@
     "scaffold": "node scaffold",
     "submit": "npm run zip && npm run upload",
     "all": "run-p input1 input2 input3 input4",
-    "input1": "npm start input1.in",
-    "input2": "npm start input2.in",
-    "input3": "npm start input3.in",
-    "input4": "npm start input4.in"
+    "input1": "npm start $npm_package_config_input1_name",
+    "input2": "npm start $npm_package_config_input2_name",
+    "input3": "npm start $npm_package_config_input3_name",
+    "input4": "npm start $npm_package_config_input4_name"
+  },
+  "config": {
+    "input1": {
+      "name": "example",
+      "id": ""
+    },
+    "input2": {
+      "name": "small",
+      "id": ""
+    },
+    "input3": {
+      "name": "medium",
+      "id": ""
+    },
+    "input4": {
+      "name": "big",
+      "id": ""
+    }
   },
   "repository": {
     "type": "git",
