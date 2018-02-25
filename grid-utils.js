@@ -33,7 +33,7 @@ module.exports = {
    * @param {GridIteratee} f
    * @returns {undefined}
    */
-  each: lift(_.each, _.each, (value, x, y, grid, row, f) =>
+  forEach: lift(_.each, _.each, (value, x, y, grid, row, f) =>
     f(value, x, y, grid, row)
   ),
 
