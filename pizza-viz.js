@@ -1,5 +1,7 @@
-// import { readFileSync } from "fs";
-// import * as _ from "lodash/fp";
+/**
+ * node ./pizza-viz <problem-input-file> <solution-file>
+ */
+
 const { readFileSync } = require("fs");
 const _ = require("lodash/fp");
 const gridUtils = require("./grid-utils");
@@ -9,7 +11,6 @@ const processIn = _.flow(
   _.tail,
   _.map(_.trim),
   _.filter(_.identity)
-  // _.map(_.flow(_.split(""), _.join(" "), row => ` ${row} `)),
 );
 
 const processOut = _.flow(
