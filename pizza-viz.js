@@ -76,21 +76,21 @@ const buildViz = (pizza, slices) => {
   gridUtils.forEach(slices, (bounds, x, y) => {
     viz = _.set([2 * y + 1, 2 * x + 1], pizza[y][x], viz);
 
-    viz = _.update([2 * y + 0, 2 * x + 0], c => bounds[0] ? "#" : c || " ", viz);
-    viz = _.update([2 * y + 0, 2 * x + 1], c => bounds[0] ? "#" : c || " ", viz);
-    viz = _.update([2 * y + 0, 2 * x + 2], c => bounds[0] ? "#" : c || " ", viz);
+    viz = _.update([2 * y + 0, 2 * x + 0], c => bounds[0] ? "+" : c || " ", viz);
+    viz = _.update([2 * y + 0, 2 * x + 1], c => bounds[0] ? "+" : c || " ", viz);
+    viz = _.update([2 * y + 0, 2 * x + 2], c => bounds[0] ? "+" : c || " ", viz);
 
-    viz = _.update([2 * y + 0, 2 * x + 2], c => bounds[1] ? "#" : c || " ", viz);
-    viz = _.update([2 * y + 1, 2 * x + 2], c => bounds[1] ? "#" : c || " ", viz);
-    viz = _.update([2 * y + 2, 2 * x + 2], c => bounds[1] ? "#" : c || " ", viz);
+    viz = _.update([2 * y + 0, 2 * x + 2], c => bounds[1] ? "+" : c || " ", viz);
+    viz = _.update([2 * y + 1, 2 * x + 2], c => bounds[1] ? "+" : c || " ", viz);
+    viz = _.update([2 * y + 2, 2 * x + 2], c => bounds[1] ? "+" : c || " ", viz);
 
-    viz = _.update([2 * y + 2, 2 * x + 0], c => bounds[2] ? "#" : c || " ", viz);
-    viz = _.update([2 * y + 2, 2 * x + 1], c => bounds[2] ? "#" : c || " ", viz);
-    viz = _.update([2 * y + 2, 2 * x + 2], c => bounds[2] ? "#" : c || " ", viz);
+    viz = _.update([2 * y + 2, 2 * x + 0], c => bounds[2] ? "+" : c || " ", viz);
+    viz = _.update([2 * y + 2, 2 * x + 1], c => bounds[2] ? "+" : c || " ", viz);
+    viz = _.update([2 * y + 2, 2 * x + 2], c => bounds[2] ? "+" : c || " ", viz);
 
-    viz = _.update([2 * y + 0, 2 * x + 0], c => bounds[3] ? "#" : c || " ", viz);
-    viz = _.update([2 * y + 1, 2 * x + 0], c => bounds[3] ? "#" : c || " ", viz);
-    viz = _.update([2 * y + 2, 2 * x + 0], c => bounds[3] ? "#" : c || " ", viz);
+    viz = _.update([2 * y + 0, 2 * x + 0], c => bounds[3] ? "+" : c || " ", viz);
+    viz = _.update([2 * y + 1, 2 * x + 0], c => bounds[3] ? "+" : c || " ", viz);
+    viz = _.update([2 * y + 2, 2 * x + 0], c => bounds[3] ? "+" : c || " ", viz);
   });
   console.log(viz.map(v=>v.map(z=>z||' ').join('')).join('\n'));
 };
