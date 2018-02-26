@@ -2,7 +2,7 @@
  * node ./pizza-viz <problem-input-file> <solution-file>
  */
 
-const { readFileSync } = require("fs");
+const { readFileSync, writeFileSync } = require("fs");
 const _ = require("lodash/fp");
 const gridUtils = require("./grid-utils");
 
@@ -72,28 +72,72 @@ const processOut = _.flow(
   )
 );
 
-const buildViz = (pizza, slices) => {
+const saveAsImage = (pizza, slices) => {
+  const Jimp = require("jimp");
+  const width = 2 * pizza[0].length + 1;
+  const height = 2 * pizza.length + 1;
+  const image = new Jimp(width, height, 0xffffffff, function(err, image) {
+    const tomato = 0xff0000ff;
+    const mushroom = 0x00ff00ff;
+    const border = 0x000000ff;
+    const empty = 0xffffffff;
+    const setColor = (y, x, hex) => {
+      if (image.getPixelColor(x, y) === 0xffffffff) {
+        image.setPixelColor(hex, x, y);
+      }
+    };
+    gridUtils.forEach(pizza, (ingredient, x, y) => {
+      const bounds = _.getOr([], [y, x], slices);
+      setColor(2 * y + 1, 2 * x + 1, pizza[y][x] === "T" ? tomato : mushroom);
+
+      setColor(2 * y + 0, 2 * x + 0, bounds[0] ? border : empty);
+      setColor(2 * y + 0, 2 * x + 1, bounds[0] ? border : empty);
+      setColor(2 * y + 0, 2 * x + 2, bounds[0] ? border : empty);
+
+      setColor(2 * y + 0, 2 * x + 2, bounds[1] ? border : empty);
+      setColor(2 * y + 1, 2 * x + 2, bounds[1] ? border : empty);
+      setColor(2 * y + 2, 2 * x + 2, bounds[1] ? border : empty);
+
+      setColor(2 * y + 2, 2 * x + 0, bounds[2] ? border : empty);
+      setColor(2 * y + 2, 2 * x + 1, bounds[2] ? border : empty);
+      setColor(2 * y + 2, 2 * x + 2, bounds[2] ? border : empty);
+
+      setColor(2 * y + 0, 2 * x + 0, bounds[3] ? border : empty);
+      setColor(2 * y + 1, 2 * x + 0, bounds[3] ? border : empty);
+      setColor(2 * y + 2, 2 * x + 0, bounds[3] ? border : empty);
+    });
+  });
+  image.write("viz.bmp");
+};
+
+const saveAsAsciiArt = (pizza, slices) => {
   let viz = [];
   gridUtils.forEach(slices, (bounds, x, y) => {
     viz = _.set([2 * y + 1, 2 * x + 1], pizza[y][x], viz);
 
-    viz = _.update([2 * y + 0, 2 * x + 0], c => bounds[0] ? "+" : c || " ", viz);
-    viz = _.update([2 * y + 0, 2 * x + 1], c => bounds[0] ? "+" : c || " ", viz);
-    viz = _.update([2 * y + 0, 2 * x + 2], c => bounds[0] ? "+" : c || " ", viz);
+    const updateViz = (y, x, boundIndex) =>
+      _.update([y, x], c => (bounds[boundIndex] ? "+" : c || " "), viz);
 
-    viz = _.update([2 * y + 0, 2 * x + 2], c => bounds[1] ? "+" : c || " ", viz);
-    viz = _.update([2 * y + 1, 2 * x + 2], c => bounds[1] ? "+" : c || " ", viz);
-    viz = _.update([2 * y + 2, 2 * x + 2], c => bounds[1] ? "+" : c || " ", viz);
-
-    viz = _.update([2 * y + 2, 2 * x + 0], c => bounds[2] ? "+" : c || " ", viz);
-    viz = _.update([2 * y + 2, 2 * x + 1], c => bounds[2] ? "+" : c || " ", viz);
-    viz = _.update([2 * y + 2, 2 * x + 2], c => bounds[2] ? "+" : c || " ", viz);
-
-    viz = _.update([2 * y + 0, 2 * x + 0], c => bounds[3] ? "+" : c || " ", viz);
-    viz = _.update([2 * y + 1, 2 * x + 0], c => bounds[3] ? "+" : c || " ", viz);
-    viz = _.update([2 * y + 2, 2 * x + 0], c => bounds[3] ? "+" : c || " ", viz);
+    viz = updateViz(2 * y + 0, 2 * x + 0, 0);
+    viz = updateViz(2 * y + 0, 2 * x + 1, 0);
+    viz = updateViz(2 * y + 0, 2 * x + 2, 0);
+    viz = updateViz(2 * y + 0, 2 * x + 2, 1);
+    viz = updateViz(2 * y + 1, 2 * x + 2, 1);
+    viz = updateViz(2 * y + 2, 2 * x + 2, 1);
+    viz = updateViz(2 * y + 2, 2 * x + 0, 2);
+    viz = updateViz(2 * y + 2, 2 * x + 1, 2);
+    viz = updateViz(2 * y + 2, 2 * x + 2, 2);
+    viz = updateViz(2 * y + 0, 2 * x + 0, 3);
+    viz = updateViz(2 * y + 1, 2 * x + 0, 3);
+    viz = updateViz(2 * y + 2, 2 * x + 0, 3);
   });
-  console.log(viz.map(v=>v.map(z=>z||' ').join('')).join('\n'));
+  const asciiViz = viz.map(v => v.map(z => z || " ").join("")).join("\n");
+  writeFileSync("viz.txt", asciiViz);
+};
+
+const buildViz = (pizza, slices) => {
+  saveAsAsciiArt(pizza, slices);
+  saveAsImage(pizza, slices);
 };
 
 const buildVizFromArgv = _.flow(
