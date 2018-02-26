@@ -24,26 +24,28 @@ function solve(problem) {
 
   let pizza = gridUtils.transpose(problem.pizza);
 
-  pizza.map((line, index) => {
-    let ingredients = _.take(line, problem.maxCells).reduce(
-      (acc, item) => {
-        acc[item]++;
-        return acc;
-      },
-      { T: 0, M: 0 }
-    );
+  pizza.forEach((line, index) => {
+    _.range(0, line.length, problem.maxCells).forEach(x => {
+      let ingredients = _.slice(line, x, x + problem.maxCells).reduce(
+        (acc, item) => {
+          acc[item]++;
+          return acc;
+        },
+        { T: 0, M: 0 }
+      );
 
-    if (
-      ingredients["T"] >= problem.minIngredients &&
-      ingredients["M"] >= problem.minIngredients
-    ) {
-      slices.push({
-        r1: 0,
-        c1: index,
-        r2: Math.min(line.length, problem.maxCells) - 1,
-        c2: index
-      });
-    }
+      if (
+        ingredients["T"] >= problem.minIngredients &&
+        ingredients["M"] >= problem.minIngredients
+      ) {
+        slices.push({
+          r1: x,
+          c1: index,
+          r2: x + Math.min(line.length - x, problem.maxCells) - 1,
+          c2: index
+        });
+      }
+    });
   });
 
   return slices;
