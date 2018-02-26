@@ -18,7 +18,12 @@
     "input1": "cross-env npm start ${npm_package_config_input1_name}.in.txt",
     "input2": "cross-env npm start ${npm_package_config_input2_name}.in.txt",
     "input3": "cross-env npm start ${npm_package_config_input3_name}.in.txt",
-    "input4": "cross-env npm start ${npm_package_config_input4_name}.in.txt"
+    "input4": "cross-env npm start ${npm_package_config_input4_name}.in.txt",
+    "viz": "node ./pizza-viz.js",
+    "viz1": "cross-env npm run viz ${npm_package_config_input1_name}.in.txt ${npm_package_config_input1_name}.out.txt",
+    "viz2": "cross-env npm run viz ${npm_package_config_input2_name}.in.txt ${npm_package_config_input2_name}.out.txt",
+    "viz3": "cross-env npm run viz ${npm_package_config_input3_name}.in.txt ${npm_package_config_input3_name}.out.txt",
+    "viz4": "cross-env npm run viz ${npm_package_config_input4_name}.in.txt ${npm_package_config_input4_name}.out.txt"
   },
   "config": {
     "input1": {
