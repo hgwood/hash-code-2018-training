@@ -116,7 +116,7 @@ function solve(problem) {
               r2: y + 1,
               c1: finDeLigne + 1,
               c2: Math.min(
-                x + Math.floor(problem.maxCells / 2) * 2,
+                finDeLigne + 1 + Math.floor(problem.maxCells / 2),
                 line.length
               )
             };
