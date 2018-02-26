@@ -22,9 +22,13 @@ const gridUtils = require("./grid-utils");
 function solve(problem) {
   let slices = [];
 
-  let pizza = gridUtils.transpose(problem.pizza);
+  const transposed = false;
 
-  pizza.forEach((line, index) => {
+  if (transposed) {
+    problem.pizza = gridUtils.transpose(problem.pizza);
+  }
+
+  problem.pizza.forEach((line, index) => {
     _.range(0, line.length, problem.maxCells).forEach(x => {
       let ingredients = _.slice(line, x, x + problem.maxCells).reduce(
         (acc, item) => {
@@ -38,12 +42,21 @@ function solve(problem) {
         ingredients["T"] >= problem.minIngredients &&
         ingredients["M"] >= problem.minIngredients
       ) {
-        slices.push({
-          r1: x,
-          c1: index,
-          r2: x + Math.min(line.length - x, problem.maxCells) - 1,
-          c2: index
-        });
+        if (transposed) {
+          slices.push({
+            r1: x,
+            c1: index,
+            r2: x + Math.min(line.length - x, problem.maxCells) - 1,
+            c2: index
+          });
+        } else {
+          slices.push({
+            r1: index,
+            c1: x,
+            r2: index,
+            c2: x + Math.min(line.length - x, problem.maxCells) - 1
+          });
+        }
       }
     });
   });
