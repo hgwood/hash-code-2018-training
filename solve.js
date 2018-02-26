@@ -110,7 +110,7 @@ function solve(problem) {
             slices.push(slice1);
           }
 
-          if (finDeLigne != line.length) {
+          /*if (finDeLigne != line.length) {
             let slice2 = {
               r1: y,
               r2: y + 1,
@@ -124,7 +124,7 @@ function solve(problem) {
             if (partValide(pizzaCopy, slice2, problem.minIngredients)) {
               slices.push(slice2);
             }
-          }
+          }*/
         }
       }
     });
