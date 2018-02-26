@@ -39,7 +39,7 @@ function solve(problem) {
         r1: index,
         c1: 0,
         r2: index,
-        c2: Math.min(line.length, problem.maxCells)
+        c2: Math.min(line.length, problem.maxCells) - 1
       });
     }
   });
