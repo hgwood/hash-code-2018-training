@@ -86,12 +86,6 @@ function solve(problem) {
           c2: x + Math.min(line.length - x, problem.maxCells) - 1
         };
 
-        if (transposed) {
-          slice = partTranspose(slice);
-        }
-
-        slices.push(slice);
-
         const { r1, r2, c1, c2 } = slice;
 
         _.range(r1, r2 + 1).forEach(y => {
@@ -99,6 +93,12 @@ function solve(problem) {
             pizzaCopy[y][x] = " ";
           });
         });
+
+        if (transposed) {
+          slice = partTranspose(slice);
+        }
+
+        slices.push(slice);
       }
     });
   });
@@ -120,13 +120,14 @@ function solve(problem) {
             c2: finDeLigne
           };
 
-          if (transposed) {
-            slice1 = partTranspose(slice1);
-          }
-
           if (partValide(pizzaCopy, slice1, problem.minIngredients)) {
-            slices.push(slice1);
             partEmpty(pizzaCopy, slice1);
+
+            if (transposed) {
+              slice1 = partTranspose(slice1);
+            }
+
+            slices.push(slice1);
           }
 
           if (finDeLigne != line.length) {
@@ -140,13 +141,12 @@ function solve(problem) {
               )
             };
 
-            if (transposed) {
-              slice2 = partTranspose(slice2);
-            }
-
             if (partValide(pizzaCopy, slice2, problem.minIngredients)) {
-              slices.push(slice2);
               partEmpty(pizzaCopy, slice2);
+              if (transposed) {
+                slice2 = partTranspose(slice2);
+              }
+              slices.push(slice2);
             }
           }
         }
