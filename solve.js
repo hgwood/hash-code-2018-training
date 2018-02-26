@@ -96,7 +96,7 @@ function solve(problem) {
         if (y < pizzaCopy.length - 1 && pizzaCopy[y + 1][x] != " ") {
           let finDeLigne = Math.min(
             x + Math.floor(problem.maxCells / 2),
-            line.length
+            line.length - 1
           );
 
           let slice1 = {
@@ -117,7 +117,7 @@ function solve(problem) {
               c1: finDeLigne + 1,
               c2: Math.min(
                 finDeLigne + 1 + Math.floor(problem.maxCells / 2),
-                line.length
+                line.length - 1
               )
             };
 
