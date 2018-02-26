@@ -38,10 +38,10 @@ function solve(problem) {
       ingredients["M"] >= problem.minIngredients
     ) {
       slices.push({
-        r1: index,
-        c1: 0,
-        r2: index,
-        c2: Math.min(line.length, problem.maxCells) - 1
+        r1: 0,
+        c1: index,
+        r2: Math.min(line.length, problem.maxCells) - 1,
+        c2: index
       });
     }
   });
