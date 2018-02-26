@@ -20,7 +20,31 @@ const gridUtils = require("./grid-utils");
  * @returns {Slice[]}
  */
 function solve(problem) {
-  return [];
+  let slices = [];
+
+  problem.pizza.map((line, index) => {
+    let ingredients = _.take(line, problem.maxCells).reduce(
+      (acc, item) => {
+        acc[item]++;
+        return acc;
+      },
+      { T: 0, M: 0 }
+    );
+
+    if (
+      ingredients["T"] >= problem.minIngredients &&
+      ingredients["M"] >= problem.minIngredients
+    ) {
+      slices.push({
+        r1: index,
+        c1: 0,
+        r2: index,
+        c2: Math.min(line.length, problem.maxCells)
+      });
+    }
+  });
+
+  return slices;
 }
 
 module.exports = solve;
