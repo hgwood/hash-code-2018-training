@@ -26,6 +26,15 @@ function partEmpty(pizza, slice) {
   return pizza;
 }
 
+function partTranspose(slice) {
+  return {
+    r1: slice.c1,
+    c1: slice.r1,
+    r2: slice.c2,
+    c2: slice.r2
+  };
+}
+
 /**
  * @typedef {object} ProblemInput
  * @property {number} nrows
@@ -46,7 +55,7 @@ function partEmpty(pizza, slice) {
 function solve(problem) {
   let slices = [];
 
-  const transposed = false;
+  const transposed = true;
 
   if (transposed) {
     problem.pizza = gridUtils.transpose(problem.pizza);
@@ -70,20 +79,15 @@ function solve(problem) {
         ingredients["T"] >= problem.minIngredients &&
         ingredients["M"] >= problem.minIngredients
       ) {
+        slice = {
+          r1: index,
+          c1: x,
+          r2: index,
+          c2: x + Math.min(line.length - x, problem.maxCells) - 1
+        };
+
         if (transposed) {
-          slice = {
-            r1: x,
-            c1: index,
-            r2: x + Math.min(line.length - x, problem.maxCells) - 1,
-            c2: index
-          };
-        } else {
-          slice = {
-            r1: index,
-            c1: x,
-            r2: index,
-            c2: x + Math.min(line.length - x, problem.maxCells) - 1
-          };
+          slice = partTranspose(slice);
         }
 
         slices.push(slice);
@@ -116,6 +120,10 @@ function solve(problem) {
             c2: finDeLigne
           };
 
+          if (transposed) {
+            slice1 = partTranspose(slice1);
+          }
+
           if (partValide(pizzaCopy, slice1, problem.minIngredients)) {
             slices.push(slice1);
             partEmpty(pizzaCopy, slice1);
@@ -131,6 +139,10 @@ function solve(problem) {
                 line.length - 1
               )
             };
+
+            if (transposed) {
+              slice2 = partTranspose(slice2);
+            }
 
             if (partValide(pizzaCopy, slice2, problem.minIngredients)) {
               slices.push(slice2);
