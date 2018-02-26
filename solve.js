@@ -22,7 +22,9 @@ const gridUtils = require("./grid-utils");
 function solve(problem) {
   let slices = [];
 
-  problem.pizza.map((line, index) => {
+  let pizza = gridUtils.transpose(problem.pizza);
+
+  pizza.map((line, index) => {
     let ingredients = _.take(line, problem.maxCells).reduce(
       (acc, item) => {
         acc[item]++;
