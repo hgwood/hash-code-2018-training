@@ -95,7 +95,7 @@ function solve(problem) {
       if (line[x] != " ") {
         if (y < pizzaCopy.length - 1 && pizzaCopy[y + 1][x] != " ") {
           let finDeLigne = Math.min(
-            x + Math.floor(problem.maxCells / 2),
+            x + Math.floor(problem.maxCells / 2) - 1,
             line.length - 1
           );
 
@@ -116,7 +116,7 @@ function solve(problem) {
               r2: y + 1,
               c1: finDeLigne + 1,
               c2: Math.min(
-                finDeLigne + 1 + Math.floor(problem.maxCells / 2),
+                finDeLigne + 1 + Math.floor(problem.maxCells / 2) - 1,
                 line.length - 1
               )
             };
