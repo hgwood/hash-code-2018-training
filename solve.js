@@ -16,6 +16,16 @@ function partValide(pizza, slice, minIngredients) {
   return t >= minIngredients && m >= minIngredients;
 }
 
+function partEmpty(pizza, slice) {
+  _.range(slice.r1, slice.r2 + 1).forEach(y => {
+    _.range(slice.c1, slice.c2 + 1).forEach(x => {
+      pizza[y][x] = " ";
+    });
+  });
+
+  return pizza;
+}
+
 /**
  * @typedef {object} ProblemInput
  * @property {number} nrows
@@ -108,6 +118,7 @@ function solve(problem) {
 
           if (partValide(pizzaCopy, slice1, problem.minIngredients)) {
             slices.push(slice1);
+            partEmpty(pizzaCopy, slice1);
           }
 
           /*if (finDeLigne != line.length) {
