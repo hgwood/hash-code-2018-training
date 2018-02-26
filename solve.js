@@ -115,7 +115,10 @@ function solve(problem) {
               r1: y,
               r2: y + 1,
               c1: finDeLigne + 1,
-              c2: Math.min(x + problem.maxCells, line.length)
+              c2: Math.min(
+                x + Math.floor(problem.maxCells / 2) * 2,
+                line.length
+              )
             };
 
             if (partValide(pizzaCopy, slice2, problem.minIngredients)) {
