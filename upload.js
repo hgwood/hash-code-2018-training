@@ -14,6 +14,8 @@ const debug = require("debug")("upload");
 const fs = require("fs");
 const joi = require("joi");
 const request = require("request-promise");
+const exec = require("child_process").execSync;
+const round = require("./round.json");
 
 const { HASH_CODE_JUDGE_AUTH_TOKEN: authToken } = process.env;
 if (authToken) {
@@ -27,7 +29,8 @@ if (authToken) {
 
 const createUrlUri =
   "https://hashcode-judge.appspot.com/api/judge/v1/upload/createUrl";
-const submitUri = "https://hashcode-judge.appspot.com/api/judge/v1/submissions";
+const submissionsUri =
+  "https://hashcode-judge.appspot.com/api/judge/v1/submissions";
 const authorizationHeader = { Authorization: `Bearer ${authToken}` };
 const dataSets = _.range(4).reduce((dataSets, i) => {
   const name = process.env[`npm_package_config_input${i + 1}_name`];
@@ -53,10 +56,42 @@ function* submitSolution(solution) {
 
   const blobKeys = yield _.mapValues(solution, upload);
   const solutionBlobKeys = _.omit(blobKeys, "sources");
-  return yield _.mapValues(solutionBlobKeys, function(blobKey, dataSetName) {
-    debug(`submitting data set ${dataSetName} (key: ${shorten(blobKey)}`);
+  const submissions = yield _.mapValues(solutionBlobKeys, function(
+    blobKey,
+    dataSetName
+  ) {
+    debug(`submitting ${dataSetName} (key: ${shorten(blobKey)})`);
     return submit(dataSets[dataSetName], blobKey, blobKeys.sources);
   });
+  _.forEach(submissions, (submission, dataSetName) => {
+    debug(`submitted ${dataSetName} (id: ${submission.id})`);
+  });
+  const scoredSubmissions = yield _.mapValues(
+    submissions,
+    (submission, dataSetName) => {
+      debug(`waiting for score on ${dataSetName}`);
+      return waitForScoring(submission, dataSetName);
+    }
+  );
+  _.forEach(
+    scoredSubmissions,
+    ({ valid, errorMessage, best, score }, dataSetName) => {
+      if (!valid) {
+        debug(`error for ${dataSetName}: ${errorMessage}`);
+      } else if (best) {
+        debug(`NEW RECORD for ${dataSetName}: ${score}`);
+      } else {
+        debug(`got score for ${dataSetName}: ${score}`);
+      }
+    }
+  );
+  const overallScore = _(scoredSubmissions)
+    .map(({ score }) => parseInt(score))
+    .reduce(_.add);
+  debug(`got overall score: ${overallScore}`);
+  debug(`tagging`);
+
+  return overallScore;
 }
 
 function* upload(filePath) {
@@ -88,10 +123,33 @@ function* submit(dataSet, submissionBlobKey, sourcesBlobKey) {
   const queryParameters = { dataSet, submissionBlobKey, sourcesBlobKey };
   return yield request({
     method: "POST",
-    uri: submitUri,
+    uri: submissionsUri,
     headers: authorizationHeader,
-    qs: queryParameters
+    qs: queryParameters,
+    json: true
   });
+}
+
+function* waitForScoring(submission, dataSetName) {
+  while (true) {
+    yield new Promise(resolve => setTimeout(resolve, 1000));
+    debug(`polling score for ${dataSetName}`);
+    const { items: submissions } = yield request({
+      method: "GET",
+      uri: `${submissionsUri}/${round.id}`,
+      headers: authorizationHeader,
+      json: true
+    });
+    const scoredSubmission = _.find(submissions, {
+      id: submission.id,
+      scored: true
+    });
+    if (scoredSubmission) {
+      return scoredSubmission;
+    } else {
+      debug(`no score yet for ${dataSetName}`);
+    }
+  }
 }
 
 function shorten(str) {
@@ -125,5 +183,11 @@ if (module === require.main) {
     }
   );
   debug("files to upload", solution);
-  co(submitSolution(solution)).catch(explode);
+  co(submitSolution(solution))
+    .catch(explode)
+    .then(score => {
+      exec(`git tag score=${score}`, {
+        encoding: "utf8"
+      });
+    });
 }
