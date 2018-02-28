@@ -19,9 +19,7 @@ const round = require("./round.json");
 
 const { HASH_CODE_JUDGE_AUTH_TOKEN: authToken } = process.env;
 const buildDir = process.env.BUILD_DIR || ".builds";
-const gitTagEnabled =
-  typeof process.env.GIT_TAG_ENABLED === "undefined" ||
-  process.env.GIT_TAG_ENABLED === "true";
+const gitTagEnabled = process.env.GIT_TAG_ENABLED !== "false";
 if (authToken) {
   debug("token", shorten(authToken));
 } else {
