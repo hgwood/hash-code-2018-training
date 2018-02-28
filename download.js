@@ -6,7 +6,7 @@ const requestPromise = require("request-promise");
 const packageJson = require("./package.json");
 
 const authToken = process.env.HASH_CODE_JUDGE_AUTH_TOKEN;
-const downloadDir = process.env.DOWNLOAD_DIR || '';
+const downloadDir = process.env.DOWNLOAD_DIR || "";
 if (!authToken) {
   console.error(
     "HASH_CODE_JUDGE_AUTH_TOKEN not defined. Set it with your auth token to the Judge system."
