@@ -175,7 +175,7 @@ if (module === require.main) {
       throw err;
     });
   const solution = Object.assign(
-    _.mapValues(dataSets, (id, name) => path.join(buildDir, `${name}.out.txt`),
+    _.mapValues(dataSets, (id, name) => path.join(buildDir, `${name}.out.txt`)),
     {
       sources: path.join(
         __dirname,
