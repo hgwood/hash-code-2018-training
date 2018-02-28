@@ -21,7 +21,9 @@ const buildDir =
   process.env.BUILD_DIR || process.env.npm_package_config_buildDir || ".builds";
 const solutionDir =
   process.env.SOLUTION_DIR || process.env.npm_package_config_solutionDir || "";
-const gitTagEnabled = process.env.GIT_TAG_ENABLED !== "false";
+const gitTagEnabled =
+  process.env.GIT_TAG_ENABLED !== "false" ||
+  process.env.npm_package_config_gitTagEnabled !== "false";
 const authToken = process.env.HASH_CODE_JUDGE_AUTH_TOKEN;
 if (authToken) {
   debug("token", shorten(authToken));
