@@ -29,7 +29,11 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 - Se familiariser avec la signature des fonctions utilitaires
 
 ## Préparation juste avant le challenge
-
+- Aller sur le judge (https://hashcodejudge.withgoogle.com/)
+- Ouvrir les devtools
+- Rafrachir la page
+- Trouve un appel d'API dans l'onglet Network (par exemple `/current`)
+- Copier le contenu du header de requête `Authorization` qui se trouve après `Bearer`
 - Créer un fichier `.env` à la racine du repo et y mettre son token d'authentification du judge (format: `HASH_CODE_JUDGE_AUTH_TOKEN=<token>`)
 
 ## Checklist de début de challenge
