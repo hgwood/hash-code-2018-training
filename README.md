@@ -38,11 +38,7 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 
 ## Checklist de début de challenge
 
-- Télécharger et commiter l'énoncé et les fichiers d'entrée avec `npm run init`
-- Modifier le champ `config` du `package.json` pour mettre le nom et les id des fichiers d'entrée
-  - `name` doit correspondre au nom du fichier sans extension
-  - `id` doit correspondre à l'id du data set dans le judge, pour pouvoir uploader
-    - l'id est la valeur du paramètre de query `dataSet` qui est fournit par le Judge à l'API quand on upload une solution (chercher l'appel à `https://hashcode-judge.appspot.com/api/judge/v1/submissions`)
+- Lancer `npm run init` (ce script télécharge énoncé et fichiers d'entrée, et remplit la section `config` du `package.json` utilisé par les autres scripts)
 
 ## Conseils
 
