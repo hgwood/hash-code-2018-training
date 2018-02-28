@@ -28,13 +28,24 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 - Configurer prettier dans l'éditeur avec format on save
 - Se familiariser avec la signature des fonctions utilitaires
 
+## Configuration
+
+Trois options sont configurables :
+- Dossier où sont téléchargés l'énoncé et les fichiers d'entrée par `npm run download` : variable d'environnement `DOWNLOAD_DIR` ou `config.downloadDir` dans `package.json`, vide par défaut (équivalent au dossier de travail)
+- Dossier où sont déposés les archives de sources : variable d'environnement `BUILD_DIR` ou `config.buildDir` dans `package.json`, `.builds` par défaut
+- Dossier où sont déposés les solutions : variable d'environnement `SOLUTION_DIR` ou `config.solutionDir` dans `package.json`, vide par défaut (équivalent au dossier de travail)
+
+Les variables d'environnement peuvent être renseignée dans un fichier [`.env`](https://www.npmjs.com/package/dotenv).
+
 ## Préparation juste avant le challenge
+
 - Aller sur le judge (https://hashcodejudge.withgoogle.com/)
 - Ouvrir les devtools
 - Rafrachir la page
 - Trouve un appel d'API dans l'onglet Network (par exemple `/current`)
 - Copier le contenu du header de requête `Authorization` qui se trouve après `Bearer`
 - Créer un fichier `.env` à la racine du repo et y mettre son token d'authentification du judge (format: `HASH_CODE_JUDGE_AUTH_TOKEN=<token>`)
+- L'opération est à répéter à chaque fois que l'upload/download échoue avec une erreur HTTP 401
 
 ## Checklist de début de challenge
 
