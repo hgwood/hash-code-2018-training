@@ -18,7 +18,7 @@ const exec = require("child_process").execSync;
 const round = require("./round.json");
 
 const { HASH_CODE_JUDGE_AUTH_TOKEN: authToken } = process.env;
-const buildDir = process.env.BUILD_DIR || ".builds";
+const buildDir = process.env.BUILD_DIR || process.env.npm_package_config_buildDir || ".builds";
 const gitTagEnabled = process.env.GIT_TAG_ENABLED !== "false";
 if (authToken) {
   debug("token", shorten(authToken));
