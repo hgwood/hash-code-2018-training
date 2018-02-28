@@ -32,8 +32,8 @@ Judge : https://hashcodejudge.withgoogle.com/#/home
 
 Trois options sont configurables :
 - Dossier où sont téléchargés l'énoncé et les fichiers d'entrée par `npm run download` : variable d'environnement `DOWNLOAD_DIR` ou `config.downloadDir` dans `package.json`, vide par défaut (équivalent au dossier de travail)
-- Dossier où sont déposés les archives de sources : variable d'environnement `BUILD_DIR` ou `config.buildDir` dans `package.json`, `.builds` par défaut
-- Dossier où sont déposés les solutions : variable d'environnement `SOLUTION_DIR` ou `config.solutionDir` dans `package.json`, vide par défaut (équivalent au dossier de travail)
+- Dossier où sont déposées les archives de sources : variable d'environnement `BUILD_DIR` ou `config.buildDir` dans `package.json`, `.builds` par défaut
+- Dossier où sont déposées les solutions : variable d'environnement `SOLUTION_DIR` ou `config.solutionDir` dans `package.json`, vide par défaut (équivalent au dossier de travail)
 
 Les variables d'environnement peuvent être renseignée dans un fichier [`.env`](https://www.npmjs.com/package/dotenv).
 
