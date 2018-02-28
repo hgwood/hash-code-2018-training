@@ -182,11 +182,7 @@ if (module === require.main) {
       path.join(solutionDir, `${name}.out.txt`)
     ),
     {
-      sources: path.join(
-        __dirname,
-        buildDir,
-        _.last(fs.readdirSync(path.join(__dirname, buildDir)).sort())
-      )
+      sources: path.join(buildDir, _.last(fs.readdirSync(buildDir).sort()))
     }
   );
   debug("files to upload", solution);
