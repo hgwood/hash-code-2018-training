@@ -136,7 +136,7 @@ const saveAsAsciiArt = (pizza, slices) => {
 };
 
 const buildViz = (pizza, slices) => {
-  saveAsAsciiArt(pizza, slices);
+  // saveAsAsciiArt(pizza, slices);
   saveAsImage(pizza, slices);
 };
 
