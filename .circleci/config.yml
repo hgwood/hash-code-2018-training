@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - save_cache:
-          key: checkout-cache-{{ .Environment.CIRCLE_SHA1 }}
+          key: &checkout_cache_key checkout-cache-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - *working_directory
 
@@ -18,13 +18,14 @@ jobs:
     steps:
       - restore_cache: &restore_checkout_cache
           keys:
-            - checkout-cache-{{ .Environment.CIRCLE_SHA1 }}
+            - *checkout_cache_key
       - restore_cache: &restore_dependency_cache
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          keys: 
+            - &dependency_cache_key dependency-cache-{{ checksum "package.json" }}
       - run:
           command: npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: *dependency_cache_key
           paths:
             - ./node_modules
 
