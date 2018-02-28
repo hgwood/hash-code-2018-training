@@ -1,6 +1,7 @@
 const _ = require("lodash");
 const debug = require("debug")("download");
 const fs = require("fs");
+const path = require("path");
 const request = require("request");
 const requestPromise = require("request-promise");
 const packageJson = require("./package.json");
@@ -55,13 +56,13 @@ const download = async () => {
   const roundFile = "round.json";
   fs.writeFileSync(roundFile, JSON.stringify(activeRound, null, 2));
   debug(`written ${roundFile}`);
-  const statementFile = downloadDir + "statement.pdf";
+  const statementFile = path.join(downloadDir, "statement.pdf");
   downloadProblemStatement(activeRound)
     .pipe(fs.createWriteStream(statementFile))
     .on("close", () => debug(`written ${statementFile}`));
   downloadInputs(activeRound).forEach(({ name, stream }) => {
     const sanitizedName = _.kebabCase(name);
-    const inputFile = `${downloadDir}${sanitizedName}.in.txt`;
+    const inputFile = path.join(downloadDir, `${sanitizedName}.in.txt`);
     stream
       .pipe(fs.createWriteStream(inputFile))
       .on("close", () => debug(`written ${inputFile}`));
