@@ -21,7 +21,7 @@ jobs:
             - *checkout_cache_key
       - restore_cache: &restore_dependency_cache
           keys: 
-            - &dependency_cache_key dependency-cache-{{ checksum "package-lock.json" }}
+            - &dependency_cache_key dependency-cache-{{ checksum "package.json" }}
       - run:
           command: npm install
       - save_cache:
