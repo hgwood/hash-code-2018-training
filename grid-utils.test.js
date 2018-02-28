@@ -22,7 +22,7 @@ describe("grid utils", function() {
   describe("each", function() {
     it("iterates", function() {
       const iterated = [];
-      gridUtils.each([[1, 2], [3, 4]], (value, x, y) =>
+      gridUtils.forEach([[1, 2], [3, 4]], (value, x, y) =>
         iterated.push({ x, y, value })
       );
       assert.deepEqual(iterated, [
