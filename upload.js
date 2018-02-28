@@ -18,6 +18,8 @@ const exec = require("child_process").execSync;
 const round = require("./round.json");
 
 const { HASH_CODE_JUDGE_AUTH_TOKEN: authToken } = process.env;
+const buildDir = process.env.BUILD_DIR || '.builds'
+const gitTagEnabled = typeof(process.env.GIT_TAG_ENABLED) === 'undefined' || process.env.GIT_TAG_ENABLED === 'true';
 if (authToken) {
   debug("token", shorten(authToken));
 } else {
@@ -173,12 +175,12 @@ if (module === require.main) {
       throw err;
     });
   const solution = Object.assign(
-    _.mapValues(dataSets, (id, name) => `${name}.out.txt`),
+    _.mapValues(dataSets, (id, name) => `${buildDir}${name}.out.txt`),
     {
       sources: path.join(
         __dirname,
-        ".builds",
-        _.last(fs.readdirSync(path.join(__dirname, ".builds")).sort())
+        buildDir,
+        _.last(fs.readdirSync(path.join(__dirname, buildDir)).sort())
       )
     }
   );
@@ -186,8 +188,10 @@ if (module === require.main) {
   co(submitSolution(solution))
     .catch(explode)
     .then(score => {
-      exec(`git tag score=${score}`, {
-        encoding: "utf8"
-      });
+      if (gitTagEnabled) {
+        exec(`git tag score=${score}`, {
+          encoding: "utf8"
+        });
+      }
     });
 }
