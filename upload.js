@@ -17,7 +17,14 @@ const request = require("request-promise");
 const exec = require("child_process").execSync;
 const round = require("./round.json");
 
-const { HASH_CODE_JUDGE_AUTH_TOKEN: authToken } = process.env;
+const buildDir =
+  process.env.BUILD_DIR || process.env.npm_package_config_buildDir || ".builds";
+const solutionDir =
+  process.env.SOLUTION_DIR || process.env.npm_package_config_solutionDir || "";
+const gitTagEnabled =
+  process.env.TAG_ON_UPLOAD !== "false" ||
+  process.env.npm_package_config_tagOnUpload !== "false";
+const authToken = process.env.HASH_CODE_JUDGE_AUTH_TOKEN;
 if (authToken) {
   debug("token", shorten(authToken));
 } else {
@@ -173,21 +180,21 @@ if (module === require.main) {
       throw err;
     });
   const solution = Object.assign(
-    _.mapValues(dataSets, (id, name) => `${name}.out.txt`),
+    _.mapValues(dataSets, (id, name) =>
+      path.join(solutionDir, `${name}.out.txt`)
+    ),
     {
-      sources: path.join(
-        __dirname,
-        ".builds",
-        _.last(fs.readdirSync(path.join(__dirname, ".builds")).sort())
-      )
+      sources: path.join(buildDir, _.last(fs.readdirSync(buildDir).sort()))
     }
   );
   debug("files to upload", solution);
   co(submitSolution(solution))
     .catch(explode)
     .then(score => {
-      exec(`git tag score=${score}`, {
-        encoding: "utf8"
-      });
+      if (gitTagEnabled) {
+        exec(`git tag score=${score}`, {
+          encoding: "utf8"
+        });
+      }
     });
 }

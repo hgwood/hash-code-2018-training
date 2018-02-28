@@ -12,9 +12,15 @@ try {
 } catch (err) {
   console.warn("could not commit because", err, "continuing anyway");
 }
+const buildDir =
+  process.env.BUILD_DIR || process.env.npm_package_config_buildDir || ".builds";
 const sha1 = exec("git rev-parse HEAD", { encoding: "utf8" }).trim();
 const date = new Date().toISOString().replace(/:/g, "-");
-const dest = `./.builds/submission-sources-${date}-${sha1}.zip`;
+const dest = path.join(
+  __dirname,
+  buildDir,
+  `submission-sources-${date}-${sha1}.zip`
+);
 
 try {
   fs.mkdirSync(path.dirname(dest));
