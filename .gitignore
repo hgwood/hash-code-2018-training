@@ -44,3 +44,5 @@ jspm_packages
 
 Environment vars
 /.env
+
+.idea

@@ -6,6 +6,7 @@ const requestPromise = require("request-promise");
 const packageJson = require("./package.json");
 
 const authToken = process.env.HASH_CODE_JUDGE_AUTH_TOKEN;
+const downloadDir = process.env.DOWNLOAD_DIR || '';
 if (!authToken) {
   console.error(
     "HASH_CODE_JUDGE_AUTH_TOKEN not defined. Set it with your auth token to the Judge system."
@@ -54,13 +55,13 @@ const download = async () => {
   const roundFile = "round.json";
   fs.writeFileSync(roundFile, JSON.stringify(activeRound, null, 2));
   debug(`written ${roundFile}`);
-  const statementFile = "statement.pdf";
+  const statementFile = downloadDir + "statement.pdf";
   downloadProblemStatement(activeRound)
     .pipe(fs.createWriteStream(statementFile))
     .on("close", () => debug(`written ${statementFile}`));
   downloadInputs(activeRound).forEach(({ name, stream }) => {
     const sanitizedName = _.kebabCase(name);
-    const inputFile = `${sanitizedName}.in.txt`;
+    const inputFile = `${downloadDir}${sanitizedName}.in.txt`;
     stream
       .pipe(fs.createWriteStream(inputFile))
       .on("close", () => debug(`written ${inputFile}`));
