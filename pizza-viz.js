@@ -116,7 +116,7 @@ const saveAsAsciiArt = (pizza, slices) => {
     viz = _.set([2 * y + 1, 2 * x + 1], pizza[y][x], viz);
 
     const updateViz = (y, x, boundIndex) =>
-      _.update([y, x], c => (bounds[boundIndex] ? "+" : c || " "), viz);
+      _.update([y, x], c => (bounds ? (bounds[boundIndex] ? "+" : c || " ") : "X"), viz);
 
     viz = updateViz(2 * y + 0, 2 * x + 0, 0);
     viz = updateViz(2 * y + 0, 2 * x + 1, 0);
@@ -131,8 +131,8 @@ const saveAsAsciiArt = (pizza, slices) => {
     viz = updateViz(2 * y + 1, 2 * x + 0, 3);
     viz = updateViz(2 * y + 2, 2 * x + 0, 3);
   });
-  const asciiViz = viz.map(v => v.map(z => z || " ").join("")).join("\n");
-  writeFileSync("viz.txt", asciiViz);
+  // const asciiViz = viz.map(v => v.map(z => z || " ").join("")).join("\n");
+  // writeFileSync("viz.txt", asciiViz);
 };
 
 const buildViz = (pizza, slices) => {
